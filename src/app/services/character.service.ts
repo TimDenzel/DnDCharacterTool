@@ -11,7 +11,7 @@ import {MessageService} from "./message.service";
 
 export class CharacterService {
 
-  private charactersUrl = 'api/characters'; // URL to web api
+  private charactersUrl = 'https://localhost:5000'; // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -22,30 +22,17 @@ export class CharacterService {
     private messageService: MessageService) {  }
 
   getCharacter(id: number): Observable<Character> {
-    const url = `${this.charactersUrl}/${id}`;
+    const url = `${this.charactersUrl}/character?id=${id}`;
     return this.http.get<Character>(url).pipe(
       tap(_ => this.log(`fetched character id=${id}`)),
       catchError(this.handleError<Character>(`getCharacter id=${id}`))
     );
   }
 
-  /** GET character by id. Return `undefined` when id not found */
-  getCharacterNo404(id: number): Observable<Character> {
-    const url = `${this.charactersUrl}/${id}`;
-    return this.http.get<Character[]>(url)
-      .pipe(
-        map(characters => characters[0]), // returns a {0|1} element array
-        tap(c => {
-          const outcome = c ? 'fetched' : 'did not find';
-          this.log(`${outcome} character id=${id}`);
-        }),
-      catchError(this.handleError<Character>(`getCharacter id=${id}`))
-    );
-  }
   /** GET characters form the server */
   getCharacters(): Observable<Character[]> {
 
-    return this.http.get<Character[]>(this.charactersUrl)
+    return this.http.get<Character[]>(`${this.charactersUrl}/characters?name=`)
       .pipe(
         tap(_ => this.log('CharacterService: fetched characters')),
         catchError(this.handleError<Character[]>('getCharacters', []))
@@ -55,10 +42,9 @@ export class CharacterService {
   /* GET characters whose name contains search term */
   searchCharacters(term: string): Observable<Character[]> {
     if (!term.trim()) {
-
       return of([]);
     }
-    return this.http.get<Character[]>(`${this.charactersUrl}/?name=${term}`).pipe(
+    return this.http.get<Character[]>(`${this.charactersUrl}/characters?name=${term}`).pipe(
       tap(x => x.length ?
         this.log(`found characters matching "${term}"`) :
         this.log(`no characters matching "${term}"`)),
@@ -70,7 +56,7 @@ export class CharacterService {
 
   /** POST: add a new character to the server */
   addCharacter(character: Character): Observable<Character> {
-    return this.http.post<Character>(this.charactersUrl, character, this.httpOptions).pipe(
+    return this.http.post<Character>(`${this.charactersUrl}/character`, character, this.httpOptions).pipe(
       tap((newCharacter: Character) => this.log(`added character w/ id=${newCharacter.id}`)),
       catchError(this.handleError<Character>('addCharacter'))
     );
@@ -78,7 +64,7 @@ export class CharacterService {
 
   /** PUT: update the chracter on the server */
   updateCharacter(character: Character): Observable<any> {
-    return this.http.put(this.charactersUrl, character, this.httpOptions).pipe(
+    return this.http.put(`${this.charactersUrl}/character?id=${character.id}`, character, this.httpOptions).pipe(
       tap(_ => this.log(`updated character id=${character.id}`)),
       catchError(this.handleError<any>('updateCharacter'))
     );
@@ -86,7 +72,7 @@ export class CharacterService {
 
   /** DELETE: delete the hero from the server */
   deleteCharacter(id: number): Observable<Character> {
-    const url = `${this.charactersUrl}/${id}`;
+    const url = `${this.charactersUrl}/character?id=${id}`;
 
     return this.http.delete<Character>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted character id=${id}`)),

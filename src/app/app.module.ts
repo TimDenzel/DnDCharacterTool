@@ -15,18 +15,14 @@ import {CharacterComponent} from './character/character.component';
 import {CharacterSearchComponent} from './character-search/character-search.component';
 import {MessagesComponent} from './messages/messages.component';
 
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, {dataEncapsulation: false}
-    )
+
   ],
 
   declarations: [
