@@ -1,4 +1,4 @@
-export interface  Character {
+export interface Character {
   id: number;
   name: string;
   level: number;
@@ -7,12 +7,12 @@ export interface  Character {
   constitution: number;
   intelligence: number;
   wisdom: number;
-  charisma:number;
+  charisma: number;
   maxHP: number;
   ac: number;
-  speed: number;
   resistances: string;
   immunities: string;
   passivePerception: number;
   languages: string;
+  information: string;
 }

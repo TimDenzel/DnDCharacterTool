@@ -17,3 +17,13 @@ h2 {
   color: white;
   background-color: #42545C;
 }
+
+div.scroll {
+  background-color: #fcf0fd;
+  width: 600px;
+  height: 150px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: start;
+  padding: 20px;
+}

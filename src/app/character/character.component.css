@@ -61,12 +61,6 @@ input {
   border-radius: 4px 0 0 4px;
 }
 
-.add-button {
-  padding: .5rem 1.5rem;
-  font-size: 1rem;
-  margin-bottom: 2rem;
-}
-
 .add-button:hover {
   color: white;
   background-color: #42545C;
@@ -74,16 +68,28 @@ input {
 
 button.delete {
   position: absolute;
-  left: 210px;
-  top: 5px;
-  background-color: white;
-  color:  #525252;
-  font-size: 1.1rem;
+  left: 200px;
+  top: 2px;
+  background-color: transparent;
+  color: #525252;
+  font-size: 1.3rem;
   margin: 0;
   padding: 1px 10px 3px 10px;
+  border: none;
 }
 
 button.delete:hover {
   background-color: #525252;
   color: white;
 }
+
+.characterList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  z-index: 1;
+}
+

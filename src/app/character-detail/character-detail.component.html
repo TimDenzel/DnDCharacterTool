@@ -1,10 +1,90 @@
 <div *ngIf="character">
-  <h2>{{character.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{character.id}}</div>
-  <div>
-    <label for="character-name">Character name: </label>
-    <input id="character-name" [(ngModel)]="character.name" placeholder="Character name">
+  <h1>{{character.name | uppercase}} Details</h1>
+  <div class="character-details">
+    <br>
+    <div class="form-group detail">
+      <label for="character-name">Name: </label>
+      <input id="character-name" type="text" [(ngModel)]="character.name" placeholder="Character name" disabled>
+    </div>
+    <br>
+    <div class="form-group detail">
+      <label for="character-level">Level: </label>
+      <input id="character-level" type="number" [(ngModel)]="character.level" placeholder="1" disabled>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-strength">Strength: </label>
+      <input id="character-strength" type="number" [(ngModel)]="character.strength" placeholder="10" disabled>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-dexterity">Dexterity: </label>
+      <input id="character-dexterity" type="number" [(ngModel)]="character.dexterity" placeholder="10" disabled>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-constitution">Constitution: </label>
+      <input id="character-constitution" type="number" [(ngModel)]="character.constitution" placeholder="10" disabled>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-intelligence">Intelligence: </label>
+      <input id="character-intelligence" type="number" [(ngModel)]="character.intelligence" placeholder="10" disabled>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-wisdom">Wisdom: </label>
+      <input id="character-wisdom" type="number" [(ngModel)]="character.wisdom" placeholder="10" disabled>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-charisma">Charisma: </label>
+      <input id="character-charisma" type="number" [(ngModel)]="character.charisma" placeholder="10" disabled>
+    </div>
+    <br>
+    <div class="form-group stats">
+      <label for="character-maxHP">MaxHP: </label>
+      <input id="character-maxHP" type="number" [(ngModel)]="character.maxHP" placeholder="0" disabled>
+    </div>
+    <br>
+    <div class="form-group stats">
+      <label for="character-ac">Armor Class: </label>
+      <input id="character-ac" type="number" [(ngModel)]="character.ac" placeholder="10" disabled>
+    </div>
+    <br>
+    <div class="form-group stats">
+      <label for="character-passivePerception">Passive Perception: </label>
+      <input id="character-passivePerception" type="number" [(ngModel)]="character.passivePerception"
+             placeholder="10" disabled>
+    </div>
+    <br>
+    <div class="form-group data">
+      <label for="character-resistances">Resistances: </label>
+      <textarea id="character-resistances" type="textarea" [(ngModel)]="character.resistances"
+                placeholder="Keine" disabled></textarea>
+    </div>
+    <br>
+    <div class="form-group data">
+      <label for="character-immunities">Immunities: </label>
+      <textarea id="character-immunities" type="textarea" [(ngModel)]="character.immunities"
+                placeholder="Keine" disabled></textarea>
+    </div>
+    <br>
+    <div class="form-group data">
+      <label for="character-languages">Languages: </label>
+      <textarea id="character-languages" [(ngModel)]="character.languages" placeholder="Common" disabled></textarea>
+    </div>
+    <br>
+    <div class="form-group info">
+      <label for="character-information">Informations: </label>
+      <textarea id="character-information" [(ngModel)]="character.information" placeholder="Keine"
+                disabled></textarea>
+    </div>
+    <br>
+    <button type="button" class="update-buttons" id="enable-update" (click)="updateDetails()">Enable Update</button>
+    <button type="button" class="update-buttons" id="go-back" (click)="goBack()">Go back</button>
+    <button type="button" class="update-buttons" id="disable-update" (click)="disableUpdate()" hidden>Disable Update
+    </button>
+    <button type="button" class="update-buttons" id="update-button" (click)="save()" hidden>Update</button>
   </div>
-  <button type="button" (click)="save()">Save</button>
-  <button type="button" (click)="goBack()">Go back</button>
 </div>

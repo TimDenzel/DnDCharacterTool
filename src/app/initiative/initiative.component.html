@@ -1,0 +1,21 @@
+<div class="character-selector">
+  <ng-form class="initiative" id="initiative" #initiativeForm="ngForm" (ngSubmit)="invokeInitiative(initiativeForm)">
+    <li *ngFor="let character of characters" id="characterList">
+      <label>
+        {{character.name}}
+      </label>
+      <input type="checkbox" class="addOrRemove" title="delete character"
+             (change)="addOrRemove(character)" />
+    </li>
+    <button>Submit</button>
+  </ng-form>
+  <ng-form class="addCharacter" #characterForm="ngForm" (ngSubmit)="addCharacterToList(characterForm)">
+    <label for="newCharacterName">Name: </label>
+    <input type="text" placeholder="new Character" id="newCharacterName" name="newCharacter" ngModel required>
+    <label for="newCharacterHP">HP: </label>
+    <input type="number" placeholder="0" id="newCharacterHP" name="newHP" #maxHP ngModel required>
+    <input type="number" value="{{maxHP}}" hidden="hidden" id="newCharacterCurrentHP" ngModel>
+    <input type="number" value="0" hidden="hidden" id="newCharacterInitiative" ngModel>
+    <button>Hinzufügen</button>
+  </ng-form>
+</div>

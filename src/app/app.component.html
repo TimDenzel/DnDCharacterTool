@@ -1,8 +1,12 @@
-<h1>{{title}}</h1>
-<nav>
-  <a routerLink="/dashboard">Dashboard </a>
-  <a routerLink="/characters">Characters </a>
-  <a (click)="uploadDocument()">Upload</a>
-</nav>
+<header>
+  <h1>{{title}}</h1>
+  <nav>
+    <a routerLink="/dashboard">Dashboard </a>
+    <a routerLink="/characters">Characters </a>
+    <a routerLink="/newCharacter">New Character </a>
+    <a routerLink="/initiative">Initiative Tracker</a>
+  </nav>
+</header>
+<img src="assets/scenery-list.jpg">
 <router-outlet></router-outlet>
 <app-messages></app-messages>

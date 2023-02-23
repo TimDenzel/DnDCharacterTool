@@ -1,0 +1,88 @@
+<img src="assets/scenery.jpg">
+
+<div class="newCharacter">
+  <h1>Neuer Charakter</h1>
+  <form class="characterForm" #characterForm="ngForm" (ngSubmit)="onFormSubmit(characterForm)">
+    <div class="form-group detail">
+      <label for="character-id">ID: </label>
+      <input id="character-id" type="number" name="id" #id ngModel required/>
+    </div>
+    <br>
+    <div class="form-group detail">
+      <label for="character-name">Name: </label>
+      <input id="character-name" type="text" name="name" ngModel required/>
+    </div>
+    <br>
+    <div class="form-group detail">
+      <label for="character-level">Level: </label>
+      <input id="character-level" type="number" name="level" ngModel required/>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-strength">Strength: </label>
+      <input id="character-strength" type="number" name="strength" ngModel required/>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-dexterity">Dexterity: </label>
+      <input id="character-dexterity" type="number" name="dexterity" ngModel required/>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-constitution">Constitution: </label>
+      <input id="character-constitution" type="number" name="constitution" ngModel required/>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-intelligence">Intelligence: </label>
+      <input id="character-intelligence" type="number" name="intelligence" ngModel required/>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-wisdom">Wisdom: </label>
+      <input id="character-wisdom" type="number" name="wisdom" ngModel required/>
+    </div>
+    <br>
+    <div class="form-group attribute">
+      <label for="character-charisma">Charisma: </label>
+      <input id="character-charisma" type="number" name="charisma" ngModel required/>
+    </div>
+    <br>
+    <div class="form-group stats">
+      <label for="character-maxHp">MaxHP: </label>
+      <input id="character-maxHp" type="number" name="maxHP" ngModel required/>
+    </div>
+    <br>
+    <div class="form-group stats">
+      <label for="character-ac">Armor Class: </label>
+      <input id="character-ac" type="number" name="ac" ngModel required/>
+    </div>
+    <br>
+    <div class="form-group stats">
+      <label for="character-passivePerception">Passive Perception: </label>
+      <input id="character-passivePerception" type="number" name="passivePerception" ngModel required/>
+    </div>
+    <br>
+    <div class="form-group data">
+      <label for="character-resistances">Resistances: </label>
+      <textarea id="character-resistances" type="textarea" name="resistances" ngModel required></textarea>
+    </div>
+    <br>
+    <div class="form-group data">
+      <label for="character-immunities">Immunities: </label>
+      <textarea id="character-immunities" type="textarea" name="immunities" ngModel required></textarea>
+    </div>
+    <br>
+    <div class="form-group data">
+      <label for="character-languages">Languages: </label>
+      <textarea id="character-languages" name="languages" ngModel required></textarea>
+    </div>
+    <br>
+    <div class="form-group info">
+      <label for="character-information">Informationen: </label>
+      <textarea id="character-information" name="information" ngModel required></textarea>
+    </div>
+    <br>
+    <button class="add-button">Charakter Hinzufügen</button>
+  </form>
+</div>

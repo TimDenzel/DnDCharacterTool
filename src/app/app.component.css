@@ -1,14 +1,42 @@
 h1 {
   margin-bottom: 0;
+  margin-top: 5px;
+  align-self: start;
+}
+header{
+  display: flex;
+  background-color: #1c87c9;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  top: 0;
+}
+nav {
+  align-items: end;
+  padding: 5px;
+}
+img {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+router-outlet {
+  position: relative;
+}
+
+app-messages {
+  position: relative;
 }
 nav a {
   padding: 1rem;
   text-decoration: none;
   margin-top: 10px;
+  margin-left: 5px;
   display: inline-block;
   background-color: #e8e8e8;
   color: #3d3d3d;
   border-radius: 4px;
+
 }
 
 nav a:hover {
@@ -18,3 +46,4 @@ nav a:hover {
 nav a:active {
   background-color: black;
 }
+

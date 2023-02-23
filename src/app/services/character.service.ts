@@ -11,7 +11,7 @@ import {MessageService} from "./message.service";
 
 export class CharacterService {
 
-  private charactersUrl = 'https://localhost:5000'; // URL to web api
+  private charactersUrl = 'http://127.0.0.1:5000'; // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -31,13 +31,17 @@ export class CharacterService {
 
   /** GET characters form the server */
   getCharacters(): Observable<Character[]> {
-
     return this.http.get<Character[]>(`${this.charactersUrl}/characters?name=`)
       .pipe(
+        map(characters => characters.sort((c1: Character, c2: Character) => {
+          if (c1.id < c2.id) return -1;
+          if (c1.id > c2.id) return 1;
+          return 0;
+        })),
         tap(_ => this.log('CharacterService: fetched characters')),
         catchError(this.handleError<Character[]>('getCharacters', []))
       );
-  }
+  };
 
   /* GET characters whose name contains search term */
   searchCharacters(term: string): Observable<Character[]> {
@@ -57,7 +61,7 @@ export class CharacterService {
   /** POST: add a new character to the server */
   addCharacter(character: Character): Observable<Character> {
     return this.http.post<Character>(`${this.charactersUrl}/character`, character, this.httpOptions).pipe(
-      tap((newCharacter: Character) => this.log(`added character w/ id=${newCharacter.id}`)),
+      tap( () => this.log(`added character`)),
       catchError(this.handleError<Character>('addCharacter'))
     );
   }
@@ -99,7 +103,7 @@ export class CharacterService {
   }
 
   /** Log a CharcterService message with the MessageService */
-  private log(message: string) {
+  public log(message: string) {
     this.messageService.add(`CharacterService: ${message}`)
   }
 }
