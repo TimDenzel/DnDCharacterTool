@@ -13,6 +13,7 @@ import {CharacterSearchComponent} from './character-search/character-search.comp
 import {MessagesComponent} from './messages/messages.component';
 import { NewCharacterComponent } from './new-character/new-character.component';
 import { InitiativeComponent } from './initiative/initiative.component';
+import { DiceRollerComponent } from './dice-roller/dice-roller.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { InitiativeComponent } from './initiative/initiative.component';
     MessagesComponent,
     CharacterSearchComponent,
     NewCharacterComponent,
-    InitiativeComponent
+    InitiativeComponent,
+    DiceRollerComponent
   ],
 
   providers: [],

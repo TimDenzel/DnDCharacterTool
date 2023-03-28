@@ -2,6 +2,7 @@ h1 {
   margin-bottom: 0;
   margin-top: 5px;
   align-self: start;
+  width: 20%;
 }
 header{
   display: flex;
@@ -12,8 +13,14 @@ header{
   top: 0;
 }
 nav {
-  align-items: end;
+  display: flex;
+  justify-content: end;
   padding: 5px;
+  width: 30%;
+}
+
+app-dice-roller {
+  width: 50%;
 }
 img {
   position: absolute;
@@ -30,12 +37,14 @@ app-messages {
 nav a {
   padding: 1rem;
   text-decoration: none;
-  margin-top: 10px;
-  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
   display: inline-block;
   background-color: #e8e8e8;
   color: #3d3d3d;
   border-radius: 4px;
+  font-weight: bold;
 
 }
 

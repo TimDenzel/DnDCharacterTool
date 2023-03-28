@@ -1,0 +1,28 @@
+.diceRoller {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  border: black solid 1px;
+  border-radius: 5px;
+  padding: 10px;
+  width: 80%;
+
+}
+
+.diceCount, .diceType {
+  display: flex;
+  flex-direction: column;
+}
+
+.calculateButton {
+  border-radius: 5px;
+  background-color: lightgray;
+  font-weight: bold;
+}
+
+input, select {
+  background-color: white;
+  text-align: center;
+  border-radius: 5px;
+}

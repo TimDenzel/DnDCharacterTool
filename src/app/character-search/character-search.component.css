@@ -1,3 +1,14 @@
+#search-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 label {
   display: block;
   font-weight: bold;
@@ -6,6 +17,7 @@ label {
   margin-bottom: .5rem;
 
 }
+
 input {
   padding: .5rem;
   width: 100%;
@@ -20,18 +32,23 @@ input:focus {
 
 li {
   list-style-type: none;
+  width: 100%;
 }
+
 .search-result li a {
+  display: block;
   border-bottom: 1px solid gray;
   border-left: 1px solid gray;
   border-right: 1px solid gray;
-  display: inline-block;
-  width: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 600px;
   max-width: 600px;
   padding: .5rem;
   box-sizing: border-box;
   text-decoration: none;
   color: black;
+  background-color: #f3edf5;
 }
 
 .search-result li a:hover {

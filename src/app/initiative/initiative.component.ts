@@ -1,10 +1,8 @@
-import {Component} from '@angular/core';
-import {OnInit} from "@angular/core";
+import {Component, OnInit} from '@angular/core';
 import {Character} from '../interfaces/character';
 import {InitiativeCharacter} from "../interfaces/initiative-character";
 import {CharacterService} from "../services/character.service";
 import {NgForm} from "@angular/forms";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-initiative',
@@ -13,7 +11,9 @@ import {Observable} from "rxjs";
 })
 export class InitiativeComponent implements OnInit {
 
-  characters: Character[] = [];
+  initiativeCount= 1;
+  activePlayerNumber = 0;
+  displayCharacters: InitiativeCharacter[] = [];
   initiativeCharacters: InitiativeCharacter[] = [];
 
   constructor(private characterService: CharacterService) {
@@ -21,40 +21,106 @@ export class InitiativeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCharacters();
+
   }
 
   getCharacters(): void {
     this.characterService.getCharacters()
-      .subscribe(characters => this.characters = characters);
+      .subscribe(characters => {
+        for (const character of characters) {
+          let initiativeCharacter = this.transformCharacterToInitiative(character);
+          this.initiativeCharacters.push(initiativeCharacter);
+          this.displayCharacters.push(initiativeCharacter);
+        }
+      });
   }
 
-  invokeInitiative(characterForm: NgForm): void {
+  invokeInitiative(): void {
+    this.initiativeCharacters.sort((c1: InitiativeCharacter, c2: InitiativeCharacter) => {
+      if (c1.initiative < c2.initiative) return 1;
+      if (c1.initiative > c2.initiative) return -1;
+      return 0;
+    });
+    document.getElementById("character-selector")!.style.display = "none";
+    document.getElementById("initiative")?.removeAttribute("hidden");
+    //@ts-ignore
+    document.getElementById(this.initiativeCharacters.at(this.activePlayerNumber).id).classList.replace('initiative-item', 'initiative-item-active');
+  }
+
+  onFormSubmit(characterForm: NgForm) {
+    for (const initiativeCharacter of this.initiativeCharacters) {
+      if (initiativeCharacter.name === characterForm.value.name) {
+        return alert(`Charaktername: ${initiativeCharacter.name} existiert bereits`)
+      }
+    }
+    const initiativeCharacter: InitiativeCharacter = characterForm.value;
+    initiativeCharacter.currentHP = initiativeCharacter.maxHP;
+    this.initiativeCharacters.push(initiativeCharacter);
+    this.displayCharacters.push(initiativeCharacter);
+  }
+
+  addOrRemove(initiativeCharacter: InitiativeCharacter) {
+    let checkbox = <HTMLInputElement>document.getElementById(initiativeCharacter.name);
+    if (checkbox.checked) {
+      this.initiativeCharacters.push(initiativeCharacter);
+      this.characterService.log(`added ${initiativeCharacter.name} to initiativeList`);
+    } else {
+      const index = this.initiativeCharacters.indexOf(initiativeCharacter);
+      if (index !== -1) {
+        this.initiativeCharacters.splice(index, 1);
+      }
+    }
+    console.log(this.initiativeCharacters.length);
+  }
+
+  transformCharacterToInitiative(character: Character): InitiativeCharacter {
+    return {
+      "id": character.id,
+      "name": character.name,
+      "maxHP": character.maxHP,
+      "currentHP": character.maxHP,
+      "ac": character.ac,
+      "initiative": 0
+    };
+  }
+
+  updateInitiative(character: InitiativeCharacter, newValue: HTMLInputElement) {
+    for (const characterElement of this.initiativeCharacters) {
+      if (character.name === characterElement.name) {
+        const index = this.initiativeCharacters.indexOf(characterElement);
+        this.initiativeCharacters[index].initiative = Number(newValue.value);
+      }
+    }
+  }
+
+  moveCharacterForward() {
+    // @ts-ignore
+    document.getElementById(this.initiativeCharacters.at(this.activePlayerNumber).id).classList.replace('initiative-item-active', 'initiative-item');
+    if (this.activePlayerNumber >= this.initiativeCharacters.length - 1) {
+      this.activePlayerNumber = 0;
+      this.initiativeCount++;
+    }else {
+      this.activePlayerNumber++;
+    }
+    //@ts-ignore
+    document.getElementById(this.initiativeCharacters.at(this.activePlayerNumber).id).classList.replace('initiative-item', 'initiative-item-active');
 
   }
 
-  addNewCharacter(name: string): void {
-    this.characters.push()
-  }
-
-  addCharacterToList(characterForm: NgForm) {
-    this.initiativeCharacters.push(characterForm.value);
-    this.createNewElement(characterForm.value);
-  }
-  addOrRemove(character: Character) {
-
-  }
-  createNewElement(initiativeCharacter: InitiativeCharacter) {
-    var li = document.createElement("li");
-    const id = initiativeCharacter.name;
-    var label = document.createElement("label");
-    label.setAttribute("for", id);
-    var checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.name = initiativeCharacter.name;
-    checkbox.id = id;
-    //checkbox.setAttribute("(change)", "addOrRemove(initiativeCharacter))";
-    li.appendChild(label);
-    li.appendChild(checkbox);
-
+  moveCharacterBack() {
+    if (this.initiativeCount === 1 && this.activePlayerNumber === 0) {
+      console.log("Initiative kann nicht in den negativen Bereich!");
+    }else{
+    // @ts-ignore
+    document.getElementById(this.initiativeCharacters.at(this.activePlayerNumber).id).classList.replace('initiative-item-active', 'initiative-item');
+    if (this.activePlayerNumber <= 0){
+      this.activePlayerNumber = this.initiativeCharacters.length - 1;
+      this.initiativeCount--;
+    }else{
+      this.activePlayerNumber--;
+    }
+    //@ts-ignore
+    document.getElementById(this.initiativeCharacters.at(this.activePlayerNumber).id).classList.replace('initiative-item', 'initiative-item-active');
+    }
   }
 }

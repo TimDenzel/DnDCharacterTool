@@ -1,11 +1,11 @@
-<img src="assets/scenery.jpg">
+<img src="assets/scenery.jpg" alt="background-image">
 
 <div class="newCharacter">
   <h1>Neuer Charakter</h1>
   <form class="characterForm" #characterForm="ngForm" (ngSubmit)="onFormSubmit(characterForm)">
     <div class="form-group detail">
       <label for="character-id">ID: </label>
-      <input id="character-id" type="number" name="id" #id ngModel required/>
+      <input id="character-id" type="number" name="id" ngModel required/>
     </div>
     <br>
     <div class="form-group detail">

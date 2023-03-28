@@ -1,21 +1,75 @@
-<div class="character-selector">
-  <ng-form class="initiative" id="initiative" #initiativeForm="ngForm" (ngSubmit)="invokeInitiative(initiativeForm)">
-    <li *ngFor="let character of characters" id="characterList">
-      <label>
-        {{character.name}}
-      </label>
-      <input type="checkbox" class="addOrRemove" title="delete character"
-             (change)="addOrRemove(character)" />
-    </li>
-    <button>Submit</button>
-  </ng-form>
-  <ng-form class="addCharacter" #characterForm="ngForm" (ngSubmit)="addCharacterToList(characterForm)">
-    <label for="newCharacterName">Name: </label>
-    <input type="text" placeholder="new Character" id="newCharacterName" name="newCharacter" ngModel required>
-    <label for="newCharacterHP">HP: </label>
-    <input type="number" placeholder="0" id="newCharacterHP" name="newHP" #maxHP ngModel required>
-    <input type="number" value="{{maxHP}}" hidden="hidden" id="newCharacterCurrentHP" ngModel>
-    <input type="number" value="0" hidden="hidden" id="newCharacterInitiative" ngModel>
-    <button>Hinzufügen</button>
-  </ng-form>
+<div class="character-selector" id="character-selector">
+  <form class="addCharacter" #initiativeCharacterForm="ngForm" (ngSubmit)="onFormSubmit(initiativeCharacterForm)">
+    <h4>Add Character to Initiative</h4>
+    <div class="input">
+      <label for="newCharacterName">Name: </label>
+      <input type="text" placeholder="new Character" id="newCharacterName" name="name" ngModel required>
+      <br>
+    </div>
+    <div class="input">
+      <label for="characterMaxHP">HP: </label>
+      <input type="number" placeholder="0" id="characterMaxHP" name="maxHP" ngModel required>
+      <br>
+    </div>
+    <div class="input">
+      <label for="characterAC">AC: </label>
+      <input type="number" placeholder="0" id="characterAC" name="ac" ngModel required>
+      <br>
+    </div>
+    <div class="input">
+      <label for="characterInitiative">Initiative: </label>
+      <input type="number" placeholder="0" id="characterInitiative" name="initiative" ngModel required>
+      <br>
+    </div>
+    <button class="add-button">Hinzufügen</button>
+  </form>
+  <div class="characterList">
+    <h3>Characters to be in Initiative</h3>
+    <ul id="characters" class="list-group">
+      <li *ngFor="let displayCharacter of displayCharacters" id="characterList" class="characterListItem">
+        <label class="characterName">
+          {{displayCharacter.name}}
+        </label>
+        <div class="inInitiative">
+          <label for="{{displayCharacter.name}}">in Initiative:</label>
+          <input type="checkbox" id="{{displayCharacter.name}}" class="addOrRemove" title="addOrRemoveCharacter"
+                 checked (click)="addOrRemove(displayCharacter)"/>
+        </div>
+        <div class="addInitiative">
+          <label for="{{displayCharacter.name}} initiative"> Initiative:</label>
+          <input type="number" id="{{displayCharacter.name}} initiative" value="{{displayCharacter.initiative}}" #initiative
+                 (change)="updateInitiative(displayCharacter, initiative)">
+        </div>
+      </li>
+    </ul>
+    <button class="add-button" (click)="invokeInitiative()">Start Initiative</button>
+  </div>
 </div>
+  <div id="initiative" hidden>
+    <ul class="initiative-list" id="initiative-characters">
+      <h1 id="initiative-count">Initiative-Round: {{initiativeCount}}</h1>
+      <li *ngFor="let initiativeCharacter of initiativeCharacters" class="initiative-item" id="{{initiativeCharacter.id}}">
+        <div id="character-initiative"><h2>{{initiativeCharacter.initiative}}</h2></div>
+        <h2 id="initiative-name">{{initiativeCharacter.name}}</h2>
+        <div class="ac">
+          <label for="ac" id="acLabel">AC:</label>
+          <p id="ac">{{initiativeCharacter.ac}}</p>
+        </div>
+        <div class="HP">
+          <label for="maxHP" id="HP">HP:</label>
+          <label for="currentHP" id="maxHP">{{initiativeCharacter.maxHP}}/</label>
+          <input type="number" inputmode="numeric" id="currentHP" value="{{initiativeCharacter.currentHP}}">
+        </div>
+        <div class="concentration">
+          <label for="concentration">Concentration:</label>
+          <input type="checkbox" id="concentration">
+        </div>
+      </li>
+      <div id="roundCounterButtons">
+        <button type="button" class="initiative-backward" (click)="moveCharacterBack()" >< Last character</button>
+        <button type="button" class="initiative-forward" (click)="moveCharacterForward()" >Next character ></button>
+      </div>
+    </ul>
+
+  </div>
+
