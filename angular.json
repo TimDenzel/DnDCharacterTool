@@ -13,9 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/dn-dcharakter-tool",
+            "outputPath": "dist/dnd-charakter-tool",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "baseHref": "/static/",
             "polyfills": [
               "zone.js"
             ],

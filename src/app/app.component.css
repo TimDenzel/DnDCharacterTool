@@ -56,3 +56,11 @@ nav a:active {
   background-color: black;
 }
 
+#shutdowm {
+  border-radius: 5px;
+  background-color: red;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+

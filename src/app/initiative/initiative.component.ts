@@ -12,6 +12,7 @@ import {NgForm} from "@angular/forms";
 export class InitiativeComponent implements OnInit {
 
   initiativeCount= 1;
+  initiativeActive = false;
   activePlayerNumber = 0;
   displayCharacters: InitiativeCharacter[] = [];
   initiativeCharacters: InitiativeCharacter[] = [];
@@ -41,10 +42,11 @@ export class InitiativeComponent implements OnInit {
       if (c1.initiative > c2.initiative) return -1;
       return 0;
     });
-    document.getElementById("character-selector")!.style.display = "none";
+    document.getElementById("initiativePreList")!.style.display = "none";
     document.getElementById("initiative")?.removeAttribute("hidden");
     //@ts-ignore
     document.getElementById(this.initiativeCharacters.at(this.activePlayerNumber).id).classList.replace('initiative-item', 'initiative-item-active');
+    this.initiativeActive = true;
   }
 
   onFormSubmit(characterForm: NgForm) {
