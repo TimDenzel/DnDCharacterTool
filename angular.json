@@ -16,7 +16,7 @@
             "outputPath": "dist/dnd-charakter-tool",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "baseHref": "/static/",
+            "baseHref": "/",
             "polyfills": [
               "zone.js"
             ],
