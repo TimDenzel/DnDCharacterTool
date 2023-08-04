@@ -42,7 +42,7 @@
         </div>
       </li>
     </ul>
-    <button class="add-button" (click)="invokeInitiative()">Start Initiative</button>
+    <button class="add-button" (click)="invokeInitiative()">Start Initiative &#9876;</button>
   </div>
 </div>
   <div id="initiative" hidden>
@@ -63,6 +63,9 @@
         <div class="concentration">
           <label for="concentration">Concentration:</label>
           <input type="checkbox" id="concentration">
+        </div>
+        <div class="removeCharacter">
+          <button id="removeCharacter" (click)="removeCharacter(initiativeCharacter)">&#10006;</button>
         </div>
       </li>
       <div id="roundCounterButtons">

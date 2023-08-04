@@ -67,12 +67,16 @@ export class InitiativeComponent implements OnInit {
       this.initiativeCharacters.push(initiativeCharacter);
       this.characterService.log(`added ${initiativeCharacter.name} to initiativeList`);
     } else {
-      const index = this.initiativeCharacters.indexOf(initiativeCharacter);
-      if (index !== -1) {
-        this.initiativeCharacters.splice(index, 1);
-      }
+      this.removeCharacter(initiativeCharacter)
     }
     console.log(this.initiativeCharacters.length);
+  }
+
+  removeCharacter(initiativeCharacter: InitiativeCharacter) {
+    const index = this.initiativeCharacters.indexOf(initiativeCharacter);
+    if (index !== -1) {
+      this.initiativeCharacters.splice(index, 1);
+    }
   }
 
   transformCharacterToInitiative(character: Character): InitiativeCharacter {

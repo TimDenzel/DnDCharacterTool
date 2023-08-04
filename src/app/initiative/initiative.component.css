@@ -201,6 +201,16 @@ ul {
   justify-content: space-between;
 }
 
+.removeCharacter {
+  display: flex;
+  justify-content: center;
+}
+
+#removeCharacter {
+  background-color: transparent;
+  border: none;
+}
+
 .initiative-forward, .initiative-backward  {
   width: 45%;
   height: 200%;

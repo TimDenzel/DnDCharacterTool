@@ -1,8 +1,9 @@
 <header>
-  <h1>{{title}}</h1>
+  <a routerLink="/dashboard">
+    <h1>{{title}}</h1>
+  </a>
   <app-dice-roller></app-dice-roller>
   <nav>
-    <a routerLink="/dashboard">Dashboard </a>
     <a routerLink="/characters">Characters </a>
     <a routerLink="/newCharacter">New Character </a>
     <a routerLink="/initiative">Initiative Tracker</a>
