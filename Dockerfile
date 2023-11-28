@@ -1,14 +1,9 @@
 ###Build###
 FROM node:20 AS build
-RUN mkdir -p /app
 WORKDIR /app
-COPY package*.json /app
+COPY package.json /app/package.json
 RUN npm install
+RUN npm install -g @angular/cli@15.1.6
 COPY . /app
-RUN npm run build
 
-###Run###
-FROM nginx:1.17.1-alpine
-COPY --from=build /usr/src/app/dist/dndcharactertool /usr/share/nginx/html
-#EXPOSE 4200
-#CMD ["npm", "start"]
+CMD ng serve --host 0.0.0.0
